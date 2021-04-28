@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 // var bodyParser = require("body-parser");
-// const test = require("../../frontend/build");
+// const test = require("./client/build");
 
 require("dotenv").config();
 
@@ -27,15 +27,10 @@ const router = require("./routes/route");
 app.use("/api", router);
 
 if (process.env.NODE_ENV == "production") {
-  // app.use(express.static("frontend/build"));
-  app.use(express.static(path.join(__dirname, "../../frontend/build")));
+  app.use(express.static(path.join(__dirname, "./client/build")));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
+    res.sendFile(path.join(__dirname, "./client/build", "index.html"));
   });
-
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  // });
 }
 
 // connect mongo start
