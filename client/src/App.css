@@ -1,0 +1,43 @@
+.userList {
+  background-color: #fff;
+  width: 30%;
+  max-height: 100vh;
+  max-width: 400px;
+  min-width: 325px;
+  border-right: 1px solid #ccc;
+}
+
+.chatPage {
+  /* background-color: red; */
+  width: 100%;
+}
+
+.userList .listBox {
+  overflow-y: auto;
+  height: calc(100% - 98px);
+}
+
+.user-card {
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-card * {
+  pointer-events: none;
+  user-select: none;
+}
+
+.user-card.active {
+  background-color: #ebebeb;
+}
+
+.user-card .phone {
+  line-height: 1;
+}
+
+.avatar {
+  width: 100%;
+  max-width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
