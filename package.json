@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently \"nodemon --watch server.js\" \"set PORT=3008 && npm start --prefix client\"",
+    "dev": "concurrently \"nodemon --watch server.js --watch ./backend\" \"set PORT=3008 && npm start --prefix client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

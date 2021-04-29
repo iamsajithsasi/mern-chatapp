@@ -22,7 +22,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3009;
 
 // import routes
-const router = require("./routes/route");
+const router = require("./backend/routes/route");
 // const { config } = require("dotenv");
 app.use("/api", router);
 

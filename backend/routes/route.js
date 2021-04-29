@@ -20,22 +20,40 @@ router.get("/user_by_id/:id", (req, res) => {
 });
 
 // create and update user
-router.post("/user_create_or_update", (req, res) => {
-  const query = { _id: req.body.id };
-  const data = {
+router.post("/user_create", (req, res) => {
+  const data = new userModel({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     phone: req.body.phone,
     email: req.body.email,
-  };
+  });
+  // console.log(data, req.body);
+  data
+    .save()
+    .then((item) => res.json({ message: "Sucess", data: item }))
+    .catch((err) => {
+      if (err.code == 11000) {
+        res
+          .status(400)
+          .send({ error: `Already Exists ${JSON.stringify(err.keyValue)}` });
+      } else {
+        res.status(400).send(err);
+      }
+    });
+});
 
+router.post("/user_update/:id", (req, res) => {
+  const query = { _id: req.params.id };
+  const update = {
+    ...req.body,
+  };
   userModel.findOneAndUpdate(
     query,
-    data,
-    { upsert: true },
+    update,
+    { upsert: false },
     function (error, doc) {
       if (error) {
-        res.statusCode(400).json({ message: error });
+        res.status(400).json({ message: error });
       } else {
         res.json({ message: "Success", data: doc });
       }

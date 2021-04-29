@@ -15,11 +15,15 @@ const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
     required: true,
+    unique: true,
+    trim: true,
   },
   last_name: String,
   phone: {
     type: Number,
     required: true,
+    unique: true,
+    trim: true,
   },
   email: {
     type: String,
@@ -27,7 +31,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
     unique: true,
-    dropDups: true,
     // isAsync: false,
     // validate: [validateEmail, "Please fill a valid email address"],
     // match: [
