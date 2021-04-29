@@ -168,9 +168,10 @@ export default function Chat() {
                 {/* <Form.Label required>Phone</Form.Label> */}
                 <Form.Control
                   name="phone"
-                  type="text"
+                  type="tel"
                   value={formInputs.phone}
-                  placeholder="Phone*"
+                  placeholder="Phone* 8001237777 "
+                  pattern="[0-9]{10}"
                   onChange={handleInput}
                   required
                 />
