@@ -14,6 +14,7 @@ import {
   faPaperPlane,
   faAngleDoubleUp,
 } from "@fortawesome/free-solid-svg-icons";
+
 import ModalPop from "./modal";
 import { postApiService } from "../library";
 
@@ -231,36 +232,40 @@ export default function Chat() {
               </h4>
             </div>
             <div className="listBox custom-scroll">
-              {chatData?.user.map((item, index) => (
-                <div
-                  key={index}
-                  value={item._id}
-                  className={`d-flex align-items-center user-card p-2 ${
-                    selUser == item._id ? "active" : ""
-                  }`}
-                  onClick={handleSelectUser}
-                >
-                  <img
-                    src={item?.image_url ? item?.image_url : avatar}
-                    alt="Avatar"
-                    className="avatar mr-2"
-                  />
-                  <div className="w-100">
-                    <p className="m-0 text-capitalize">{item.first_name}</p>
-                    <p className="m-0 phone">
-                      <small>{item.phone}</small>
-                    </p>
+              {chatData?.user?.length > 0 ? (
+                chatData?.user.map((item, index) => (
+                  <div
+                    key={index}
+                    value={item._id}
+                    className={`d-flex align-items-center user-card p-2 ${
+                      selUser == item._id ? "active" : ""
+                    }`}
+                    onClick={handleSelectUser}
+                  >
+                    <img
+                      src={item?.image_url ? item?.image_url : avatar}
+                      alt="Avatar"
+                      className="avatar mr-2"
+                    />
+                    <div className="w-100">
+                      <p className="m-0 text-capitalize">{item.first_name}</p>
+                      <p className="m-0 phone">
+                        <small>{item.phone}</small>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="p-3">No User Found</p>
+              )}
             </div>
           </div>
           <div className="chatPage position-relative">
             {selUser ? (
               <>
                 <div className="msgBox p-3 custom-scroll bg-white d-flex flex-column-reverse">
-                  {chatData?.chatStatus == "success" ? (
-                    chatHistory?.length > 0 ? (
+                  {chatData?.chatStatus != "failure" ? (
+                    chatHistory.length > 0 ? (
                       chatHistory.map((item, index) => (
                         <div
                           key={index}
@@ -275,9 +280,11 @@ export default function Chat() {
                         </div>
                       ))
                     ) : (
-                      <p className="m-0 p-0">
-                        No message found. Say Hi, to your contact Now !!
-                      </p>
+                      chatData?.chatStatus == "success" && (
+                        <p className="m-0 p-0">
+                          No message found. Say Hi, to your contact Now !!
+                        </p>
+                      )
                     )
                   ) : (
                     <p>Failed to Load Chat History</p>
