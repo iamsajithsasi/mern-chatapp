@@ -41,3 +41,50 @@
   border-radius: 50%;
   object-fit: cover;
 }
+.addUserAvatar {
+  max-width: 80px;
+  position: absolute;
+  top: -115px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button svg {
+  pointer-events: none;
+  user-select: none;
+}
+.font-20 {
+  font-size: 20px;
+}
+
+.msgBox {
+  height: 100%;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.msgBox > div > span {
+  /* min-width: 100px; */
+  max-width: 70%;
+  word-break: break-word;
+}
+
+.msgIpBox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.wlcmTxt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn.focus,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}

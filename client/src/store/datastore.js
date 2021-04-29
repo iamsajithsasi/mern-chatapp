@@ -22,15 +22,16 @@ export const userSlice = createSlice({
     user: [],
     chat: [],
     status: "init",
+    chatStatus: "init",
   },
   reducers: {
     updateUserData: (state, action) => {
-      state.data = action.payload;
+      state.data = action.payload.data;
     },
   },
   extraReducers: {
     [fetchUserData.fulfilled]: (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.data;
       state.status = "success";
     },
     [fetchUserData.rejected]: (state, action) => {
@@ -42,13 +43,16 @@ export const userSlice = createSlice({
       state.status = "pending";
     },
     [fetchUserChatData.fulfilled]: (state, action) => {
-      state.chat = action.payload.data;
+      state.chat = action.payload.data.reverse();
+      state.chatStatus = "success";
     },
     [fetchUserChatData.rejected]: (state, action) => {
       state.chat = [];
+      state.chatStatus = "failed";
     },
     [fetchUserChatData.pending]: (state, action) => {
       state.chat = [];
+      state.chatStatus = "pending";
     },
   },
 });
